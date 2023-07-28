@@ -2,11 +2,13 @@ package web.service;
 
 import web.models.User;
 
+import javax.validation.Valid;
 import java.util.List;
 
 public interface UserService {
-    List<User> getAllUsers ();
+    List<User> getUsers();
     void addUser(User user);
-    void deleteUser(User user);
-    void updateUser(User user);
+    User getUserById(long id);
+    void deleteUser(long id);
+    void editUser(@Valid User user);
 }

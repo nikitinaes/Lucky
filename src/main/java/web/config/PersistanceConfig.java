@@ -1,6 +1,7 @@
 package web.config;
 
 
+import org.hibernate.cfg.AvailableSettings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -25,7 +26,7 @@ import java.util.Properties;
 @EnableTransactionManagement
 @PropertySource(value = "classpath:db.properties")
 @ComponentScan(value = "web")
-public class PersistanceConfig {
+public class PersistanceConfig{
     @Autowired
     private Environment env;
     @Bean
@@ -41,7 +42,7 @@ public class PersistanceConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(getDataSource());
-        em.setPackagesToScan("web");
+        em.setPackagesToScan("web.models");
 
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
@@ -62,9 +63,10 @@ public class PersistanceConfig {
     }
     Properties additionalProperties() {
         Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", "update");
-        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
+        properties.setProperty("hibernate.hbm2ddl.auto", "create");
+        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL57InnoDBDialect");//
         properties.setProperty("hibernate.show_sql", "true");
+        properties.setProperty(AvailableSettings.STORAGE_ENGINE, "InnoDB");//here
         return properties;
     }
 }
