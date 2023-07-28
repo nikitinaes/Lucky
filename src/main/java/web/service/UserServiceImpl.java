@@ -15,8 +15,8 @@ import java.util.List;
         private final UserDao userDao;
 
         @Autowired
-        public UserServiceImpl(UserDao userDAO) {
-            this.userDao = userDAO;
+        public UserServiceImpl(UserDao userDao) {
+            this.userDao = userDao;
         }
 
         @Override
@@ -31,12 +31,12 @@ import java.util.List;
 
         @Override
         public void deleteUser(long id) {
-
+        userDao.deleteUser(id);
         }
 
         @Override
         public void editUser(User user) {
-
+            userDao.editUser(user);
         }
 
         @Override

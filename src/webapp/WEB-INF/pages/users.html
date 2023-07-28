@@ -42,7 +42,7 @@
         <th th:width="50">Edit</th>
         <th th:width="50">Delete</th>
     </tr>
-    <tr th:each="users : ${users}">
+    <tr th:each="users:${users}">
 
         <td><a th:href="@{'/' + ${users.userId}}" th:utext="${users.userId}">UserId</a></td>
         <td th:utext="${users.name}">Name</td>
