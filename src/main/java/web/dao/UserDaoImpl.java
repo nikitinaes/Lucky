@@ -10,17 +10,14 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
 @Component
-@Transactional
 public class UserDaoImpl implements UserDao{
     @PersistenceContext
     private EntityManager entityManager;
 
     @Override
     public List<User> getUsers() {
-
         return entityManager.createQuery("select u from User u", User.class).getResultList();
     }
-
     @Override
     public void addUser(User user) {
         entityManager.persist(user);
