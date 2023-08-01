@@ -9,13 +9,14 @@ import web.service.UserService;
 import javax.validation.Valid;
 @Controller
 public class UserController {
+
     private final UserService userService;
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
     @GetMapping("/")
-    public String users(Model model) {
+    public String getAllUsers(Model model) {
         model.addAttribute("users", userService.getUsers());
         return "users";
     }
@@ -54,7 +55,7 @@ public class UserController {
     }
 
     @PatchMapping("/edit")
-    public String update(@Valid User user, BindingResult bindingResult) {
+    public String updateUser(@Valid User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "edit";
         } else {
